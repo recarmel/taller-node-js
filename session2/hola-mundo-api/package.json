@@ -1,0 +1,15 @@
+{
+  "name": "hola-mundo-api",
+  "version": "1.0.0",
+  "description": "curso bantrab",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "melvin cardona",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}
