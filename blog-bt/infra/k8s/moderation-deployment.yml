@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # moderation-depl va a tomar como suyos todos los pods que tengan una etiqueta app: post
+      app: moderation
+  template: # me ayuda a definir metadata a los objetos del deployment
+    metadata:
+      labels: #agrego una etiqueta a los recursos que estan en deployment
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: bantrab/ms-moderation
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec:
+ # type: NodePort
+  selector:
+    app: moderation
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  #    nodePort: 30000

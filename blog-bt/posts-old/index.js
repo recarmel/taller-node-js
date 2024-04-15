@@ -13,7 +13,6 @@ const port = 4000;
 const posts = {};
 
 app.post('/posts/create', async (req, res) => {
-    console.log('respuesta2');
   const id = randomBytes(4).toString('hex');
   const { titulo } = req.body;
   posts[id] = {
@@ -40,11 +39,10 @@ app.post('/posts/create', async (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
-    console.log('respuesta1');
   res.send(posts);
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', (res, req) => {
   console.log('evento recibido', req.body.type);
   res.send({});
 });

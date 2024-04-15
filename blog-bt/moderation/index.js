@@ -19,7 +19,7 @@ app.post('/events', async (req, res) => {
     const status= data.contenido.includes('Bantrab') ? 'rechazado' : 'aprobado';
     
     await axios
-    .post('http://localhost:4005/events', {
+    .post('http://event-bus:4005/events', {
       type: 'ComentarioModerado',
       data: {
         id: data.id,

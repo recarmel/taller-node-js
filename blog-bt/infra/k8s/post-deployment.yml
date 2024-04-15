@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # posts-depl va a tomar como suyos todos los pods que tengan una etiqueta app: post
+      app: posts
+  template: # me ayuda a definir metadata a los objetos del deployment
+    metadata:
+      labels: #agrego una etiqueta a los recursos que estan en deployment
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: bantrab/ms-posts
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+ # type: NodePort
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  #    nodePort: 30000
